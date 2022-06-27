@@ -16,10 +16,7 @@
                     <a id="logo" href="#"><span><?php  the_custom_logo() ?></span></a>
                     <div id="titlebar_right">
                         <ul id="social_icons">
-                            <li><a href="#" class="linkedin"></a></li>
-                            <li><a href="#" class="facebook"></a></li>
-                            <li><a href="#" class="twitter"></a></li>
-                            <li><a href="#" class="rss"></a></li>
+	                        <?php ( get_sidebar( 'social-networks' ) ); ?>
                         </ul>
                         <div class="clear"></div>
 		                    <?php

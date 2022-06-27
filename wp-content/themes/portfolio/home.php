@@ -75,9 +75,6 @@ get_header();
             </ul>
             <div class="underline"></div>
             <div class="portfolio">
-
-                <p class="all_projects">
-                    <a href="">View all projects</a></p>
                 <h1>Portfolio</h1>
                 <div class="columns">
 					<?php

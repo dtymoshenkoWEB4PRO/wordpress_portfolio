@@ -153,6 +153,17 @@ function portfolio_widgets_init() {
 			'after_title'   => '',
 		)
 	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Social Networks Sidebar', 'portfolio' ),
+			'id'            => 'social-networks',
+			'description'   => esc_html__( 'Add widgets here.', 'portfolio' ),
+			'before_widget' => '',
+			'after_widget'  => '',
+			'before_title'  => '',
+			'after_title'   => '',
+		)
+	);
 }
 
 add_action( 'widgets_init', 'portfolio_widgets_init' );
