@@ -9,55 +9,57 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php
-		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
-		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		endif;
+<?php get_header(); ?>
 
-		if ( 'post' === get_post_type() ) :
-			?>
-			<div class="entry-meta">
-				<?php
-				portfolio_posted_on();
-				portfolio_posted_by();
-				?>
-			</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
+    <section id="content">
+        <div class="wrapper page_text">
+            <h1 class="page_title"><?php echo get_the_title( $page->ID ) ?></h1>
+            <div class="breadcrumbs">
+                <div class="inside">
+					<?php if ( function_exists( 'bcn_display' ) ) {
+						bcn_display();
+					} ?>
 
-	<?php portfolio_post_thumbnail(); ?>
+                </div>
+            </div>
 
-	<div class="entry-content">
-		<?php
-		the_content(
-			sprintf(
-				wp_kses(
-					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'portfolio' ),
-					array(
-						'span' => array(
-							'class' => array(),
-						),
-					)
-				),
-				wp_kses_post( get_the_title() )
-			)
-		);
+            <div class="columns">
+                <div class="column column75">
+					<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+                        <article class="article">
+                            <div class="article_image nomargin">
+                                <div class="inside">
+                                    <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title() ?>"/>
+                                </div>
+                            </div>
+                            <div class="article_details">
+                                <ul class="article_author_date">
+                                    <li><em><?php _e( 'Add:' ) ?></em> <?php the_date() ?></li>
+                                    <li><em><?php _e( 'Author:' ) ?></em> <a href="#"><?php the_author() ?></a></li>
+                                </ul>
+                                <p class="article_comments"><em><?php _e( 'Comment:' ) ?></em><?php the_comment() ?></p>
+                            </div>
+                            <h1><?php the_title() ?></h1>
+                            <p><?php the_content(); ?></p>
+                            <a class="button button_small button_orange float_left"
+                               href="<?php get_permalink(); ?>"><span
+                                        class="inside"><?php _e( 'read more' ) ?></span></a>
+                        </article>
+					<?php endwhile; ?>
+					<?php endif;
+					wp_reset_postdata(); ?>
+                </div>
+                <div class="column column25">
+                    <div class="padd16bot">
+						<?php ( get_sidebar( 'left' ) ); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    </div>
 
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'portfolio' ),
-				'after'  => '</div>',
-			)
-		);
-		?>
-	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php portfolio_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
-</article><!-- #post-<?php the_ID(); ?> -->
+<?php
+get_footer();

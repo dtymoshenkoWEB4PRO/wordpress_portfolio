@@ -19,28 +19,28 @@
             <div class="column column33">
                 <h1><?php echo get_field( 'photo_title', get_the_ID() ); ?></h1>
                 <p><?php the_content(); ?></p>
-                <h1>Client:</h1>
+                <h1><?php _e( 'Client:' ) ?></h1>
                 <p> <?php echo get_field( 'client', get_the_ID() ); ?></p>
-                <h1>Model & Photographer:</h1>
+                <h1><?php _e( 'Model & Photographer:' ) ?></h1>
                 <p><a href="#"><?php echo get_field( 'model', get_the_ID() ); ?></a>
-                    // <?php echo get_field( 'photografer', get_the_ID() ); ?></p>
+					<?php _e( '//' ) ?><?php echo get_field( 'photografer', get_the_ID() ); ?></p>
             </div>
-
-            <div class="column column66">
-                <div id="content_slide">
-                    <div class="flexslider">
-                        <ul class="slides">
-							<?php $image = get_field( 'pretty_photo', get_the_ID() );
-							$small_image = get_field( 'small_image', get_the_ID() ); ?>
-                            <li><a href="<?php echo $image['url'] ?>" class="lightbox"
-                                   data-rel="prettyPhoto[gallery]"><img
-                                            src="<?php echo $small_image['url'] ?>"
-                                            alt="1"/></a></li>
-                        </ul>
+			<?php $image = get_field( 'pretty_photo', get_the_ID() );
+			$small_image = get_field( 'small_image', get_the_ID() );
+			if ( $small_image && $image ): ?>
+                <div class="column column66">
+                    <div id="content_slide">
+                        <div class="flexslider">
+                            <ul class="slides">
+                                <li><a href="<?php echo $image['url'] ?>" class="lightbox"
+                                       data-rel="prettyPhoto[gallery]"><img
+                                                src="<?php echo $small_image['url'] ?>"
+                                                alt="1"/></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-
+			<?php endif; ?>
         </div>
     </div>
 </section>

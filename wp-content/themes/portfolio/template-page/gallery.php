@@ -39,16 +39,20 @@
 						$query->the_post(); ?>
                         <div class="column column50">
                             <div class="image">
-								<?php $image = get_field( 'pretty_photo', get_the_ID() );
-								$small_image = get_field( 'small_image', get_the_ID() ); ?>
+								<?php
+                                $image = get_field( 'pretty_photo', get_the_ID() );
+								$small_image = get_field( 'small_image', get_the_ID() );
+                                if ($image && $small_image):
+                                ?>
                                 <img src="<?php echo( $small_image['url'] ) ?>" alt=""/>
                                 <p class="caption">
                                     <strong><?php the_title() ?></strong>
                                     <span><?php the_content() ?></span>
                                     <a href="<?php echo( $image['url'] ) ?>" data-rel="prettyPhoto[gallery]"
                                        class="button button_small button_orange float_right lightbox"><span
-                                                class="inside">zoom</span></a>
+                                                class="inside"><?php _e('zoom') ?></span></a>
                                 </p>
+                                <?php endif; ?>
                             </div>
                         </div>
 					<?php }
@@ -68,13 +72,7 @@
 					]
 				)
 			);
-			} else {
-				global $wp_query;
-				$wp_query->set_404();
-				status_header( 404 );
-				nocache_headers();
-				require get_404_template();
-			} ?>
+			}  ?>
         </ul>
         </div>
     </section>
